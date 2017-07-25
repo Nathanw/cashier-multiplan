@@ -409,10 +409,10 @@ class Subscription extends Model
             'stripe_plan' => $plan,
             'quantity' => $quantity,
         ]);
-        
+
         return $this;
     }
-    
+
     /**
      * Adds a plan from the subscription
      *
@@ -422,26 +422,26 @@ class Subscription extends Model
     public function removeItem($plan, $prorate = true)
     {
         $item = $this->subscriptionItems()->where('stripe_plan', $plan)->first();
-        
+
         if (is_null($item)) {
             // item not found
             return $this;
         }
-        
+
         // retrieves the item stored at Stripe
         $stripeItem = $item->asStripeSubscriptionItem();
-        
+
         // deletes the item at Stripe
         $stripeItem->delete([
             'prorate' => $prorate,
         ]);
-        
+
         // removes the item from the database
         $this->subscriptionItems()->where('stripe_plan', $plan)->delete();
-        
+
         return $this;
     }
-    
+
     /**
      * Gets the item by name
      *
@@ -452,10 +452,10 @@ class Subscription extends Model
     {
         return $this->subscriptionItems()->where('stripe_plan', $plan)->first();
     }
-    
+
     /**
      * Determines if the subscription contains the given plan
-     * 
+     *
      * @param string $plan The plan's ID
      * @return bool
      */

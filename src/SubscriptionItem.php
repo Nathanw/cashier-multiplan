@@ -24,7 +24,7 @@ class SubscriptionItem extends Model
     protected $dates = [
         'created_at', 'updated_at',
     ];
-    
+
     /**
      * Get the subscription as a Stripe subscription object.
      *
@@ -35,10 +35,10 @@ class SubscriptionItem extends Model
         $stripeSubscription = $this->subscription->asStripeSubscription();
         // strips out the "subscription" parameter which causes an API error (unknown parameter)
         $stripeSubscription->items->url = substr($stripeSubscription->items->url, 0, strpos($stripeSubscription->items->url, '?'));
-        
+
         return $stripeSubscription->items->retrieve($this->stripe_id);
     }
-    
+
     /**
      * Gets the subscription that contains this item
      */
@@ -46,7 +46,7 @@ class SubscriptionItem extends Model
     {
         return $this->belongsTo(Subscription::class);
     }
-    
+
     /**
      * Increment the quantity of the subscription.
      *

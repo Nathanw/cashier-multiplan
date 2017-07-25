@@ -12,7 +12,7 @@ class MultisubscriptionBuilder extends SubscriptionBuilder
      * @var array
      */
     protected $plans = [];
-    
+
     /**
      * Create a new subscription builder instance.
      *
@@ -26,7 +26,7 @@ class MultisubscriptionBuilder extends SubscriptionBuilder
         $this->owner = $owner;
         $this->name = $name;
     }
-    
+
     /**
      * Add a new Stripe subscription to the Stripe model.
      *
@@ -38,7 +38,7 @@ class MultisubscriptionBuilder extends SubscriptionBuilder
         $this->plans[$code] = $quantity;
         return $this;
     }
-    
+
     /**
      * Creates a new Stripe subscription with multiple plans.
      *
@@ -57,7 +57,7 @@ class MultisubscriptionBuilder extends SubscriptionBuilder
         } else {
             $trialEndsAt = $this->trialExpires;
         }
-        
+
         // registers the subscription
         $subscription = $this->owner->subscriptions()->create([
             'name' => $this->name,
@@ -67,7 +67,7 @@ class MultisubscriptionBuilder extends SubscriptionBuilder
             'trial_ends_at' => $trialEndsAt,
             'ends_at' => null,
         ]);
-        
+
         // registers the subscription's items
         foreach ($stripeSubscription->items->data as $item) {
             $subscription->subscriptionItems()->create([
@@ -76,10 +76,10 @@ class MultisubscriptionBuilder extends SubscriptionBuilder
                 'quantity' => $item['quantity'],
             ]);
         }
-        
+
         return $subscription;
     }
-    
+
     /**
      * Build the payload for subscription creation.
      *
@@ -95,7 +95,7 @@ class MultisubscriptionBuilder extends SubscriptionBuilder
             'metadata' => $this->metadata,
         ]);
     }
-    
+
     protected function buildPayloadItems()
     {
         $items = [];
