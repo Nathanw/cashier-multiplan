@@ -726,11 +726,11 @@ trait Billable
      *
      * @param  string  $subscription
      * @param  string  $plan
-     * @return \Jurihub\CashierMultiplan\SubscriptionBuilder
+     * @return \Jurihub\CashierMultiplan\MultisubscriptionBuilder
      */
-    public function newMultisubscription()
+    public function newMultisubscription($subscription)
     {
-        return new MultisubscriptionBuilder($this);
+        return new MultisubscriptionBuilder($this, $subscription);
     }
 
     /**
