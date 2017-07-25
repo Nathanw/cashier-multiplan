@@ -1,10 +1,10 @@
 <?php
-// > vendor\bin\phpunit vendor\laravel\cashier\tests
+// > vendor\bin\phpunit vendor\jurihub\cashier-multiplan\tests
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use Laravel\Cashier\Http\Controllers\WebhookController;
+use Jurihub\CashierMultiplan\Http\Controllers\WebhookController;
 
 class CashierTest extends PHPUnit_Framework_TestCase
 {
@@ -495,7 +495,7 @@ class CashierTest extends PHPUnit_Framework_TestCase
 
 class User extends Eloquent
 {
-    use Laravel\Cashier\Billable;
+    use Jurihub\CashierMultiplan\Billable;
 }
 
 class CashierTestControllerStub extends WebhookController
